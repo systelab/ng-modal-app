@@ -4,22 +4,26 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { SampleComponent } from './sample/sample.component';
+import { FirstComponent } from './first/first.component';
+import { SecondComponent } from './second/second.component';
 
 @NgModule({
-  declarations: [
+  declarations:    [
     AppComponent,
-    SampleComponent
+    FirstComponent,
+    SecondComponent
   ],
-  imports: [
+  imports:         [
     BrowserModule,
     BrowserAnimationsModule,
     OverlayModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent],
+  providers:       [],
+  bootstrap:       [AppComponent],
   entryComponents: [
-    SampleComponent
+    FirstComponent,
+    SecondComponent
   ]
 })
-export class AppModule { }
+export class AppModule {
+}

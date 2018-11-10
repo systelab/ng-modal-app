@@ -1,35 +1,26 @@
-import { Component, ComponentRef } from '@angular/core';
-import { ComponentPortal } from '@angular/cdk/portal';
-import { Overlay } from '@angular/cdk/overlay';
-import { SampleComponent } from './sample/sample.component';
+import { Component } from '@angular/core';
+import { DialogService } from './library/dialog.service';
+import { FirstComponent, FirstComponentParameters } from './first/first.component';
 
 @Component({
   selector:    'app-root',
-  templateUrl: './app.component.html',
-  styleUrls:   ['./app.component.scss']
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
   title = 'modal-app';
 
-  constructor(public overlay: Overlay) {
-
+  constructor(protected dialogService: DialogService) {
   }
 
   public doSomething() {
-    const overlayRef = this.overlay.create({
-      height:           '400px',
-      width:            '600px',
-      hasBackdrop:      true,
-      positionStrategy: this.overlay.position()
-                          .global()
-                          .centerHorizontally()
-                          .centerVertically(),
-      scrollStrategy:   this.overlay.scrollStrategies.block()
-    });
-    const userProfilePortal = new ComponentPortal(SampleComponent);
-    const compRef: ComponentRef<SampleComponent> = overlayRef.attach(userProfilePortal);
-    compRef.instance.closeEmitter.subscribe(() => {
-      overlayRef.dispose();
-    });
+    const parameters: FirstComponentParameters = FirstComponent.getParameters();
+    parameters.parameterOne = '1';
+
+    this.dialogService.showDialog(FirstComponent, parameters)
+      .subscribe(
+        (result) => {
+          console.log(result);
+        }
+      );
   }
 }
