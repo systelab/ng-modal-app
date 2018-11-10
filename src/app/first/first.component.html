@@ -1,11 +1,11 @@
-<div class="d-flex p-2 flex-column w-100 h-100 bg-info">
-  <div>{{title}}</div>
+<div class="d-flex flex-column w-100 h-100 bg-light">
+  <div class="bg-primary text-white p-3">{{title}}</div>
   <div class="slab-flex-1 slab-overflow-container container-fluid">
 
     <p>First Component</p>
   </div>
-  <div class="d-flex">
-    <button class="btn btn-primary mr-2" (click)="doAnother()">Show Second</button>
-    <button class="btn btn-primary ml-auto" (click)="doClose()">Close</button>
+  <div class="d-flex p-2 bg-white border-top">
+    <button class="btn btn-dark mr-2" (click)="doAnother()">Show Second</button>
+    <button class="btn btn-dark ml-auto" (click)="doClose()">Close</button>
   </div>
 </div>

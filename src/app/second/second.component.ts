@@ -17,6 +17,7 @@ export class SecondComponentParameters extends SystelabModalContext {
 export class SecondComponent implements ModalComponent<SecondComponentParameters> {
 
   public closeEmitter = new EventEmitter();
+  public title = 'Second Modal';
 
   constructor(public dialog: OverlayRef, @Inject(SYS_DIALOG_DATA) public parameters: SecondComponentParameters) {
     console.log(this.parameters);

@@ -18,6 +18,7 @@ export class FirstComponentParameters extends SystelabModalContext {
 export class FirstComponent implements ModalComponent<FirstComponentParameters> {
 
   public closeEmitter = new EventEmitter();
+  public title = 'First Modal';
 
   constructor(public dialog: OverlayRef, @Inject(SYS_DIALOG_DATA) public parameters: FirstComponentParameters, protected dialogService: DialogService) {
   }
