@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Inject } from '@angular/core';
 import { ModalComponent, SystelabModalContext } from '../library/modal';
-import { SYS_DIALOG_DATA, SYS_DIALOG_REF } from '../library/dialog.service';
+import { SYS_DIALOG_DATA } from '../library/dialog.service';
+import { OverlayRef } from '@angular/cdk/overlay';
 
 export class SecondComponentParameters extends SystelabModalContext {
   public parameterOne: string;
@@ -17,10 +18,7 @@ export class SecondComponent implements ModalComponent<SecondComponentParameters
 
   public closeEmitter = new EventEmitter();
 
-  public parameters: SecondComponentParameters;
-
-  constructor(@Inject(SYS_DIALOG_REF) public dialog: any,@Inject(SYS_DIALOG_DATA) public data: any) {
-    this.parameters = data;
+  constructor(public dialog: OverlayRef, @Inject(SYS_DIALOG_DATA) public parameters: SecondComponentParameters) {
     console.log(this.parameters);
   }
 
@@ -29,7 +27,7 @@ export class SecondComponent implements ModalComponent<SecondComponentParameters
   }
 
   public doClose() {
-    this.dialog.dispose()
+    this.dialog.dispose();
     this.closeEmitter.emit();
   }
 }
