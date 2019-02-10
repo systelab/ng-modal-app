@@ -4,8 +4,8 @@ import { SecondComponent, SecondComponentParameters } from '../second/second.com
 
 export class FirstComponentParameters extends SystelabModalContext {
   public parameterOne: string;
-  public width = 900;
-  public height = 450;
+  public widthRelative = '50%';
+  public heightRelative = '50%';
 }
 
 @Component({
