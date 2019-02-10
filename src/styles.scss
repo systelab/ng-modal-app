@@ -1,6 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/cdk/overlay-prebuilt.css';
 
+.cdk-overlay-pane {
+  background-color: white;
+
+  & > *:first-child {
+
+  }
+}
+
+.cdk-overlay-backdrop {
+  transition: none;
+}
+
 div [class="cdk-overlay-pane"] {
   border: 5px solid lightgray;
   border-radius: 5px;
