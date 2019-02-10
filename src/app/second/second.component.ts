@@ -1,7 +1,6 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { ModalComponent, SystelabModalContext } from '../library/modal';
-import { SYS_DIALOG_DATA } from '../library/dialog.service';
-import { SystelabOverlayRef } from '../library/systelab-overlay-ref';
+import { DialogRef } from '../library/dialog-ref';
 
 export class SecondComponentParameters extends SystelabModalContext {
   public parameterOne: string;
@@ -17,9 +16,10 @@ export class SecondComponentParameters extends SystelabModalContext {
 export class SecondComponent implements ModalComponent<SecondComponentParameters> {
 
   public title = 'Second Modal';
+  public parameters: SecondComponentParameters;
 
-  constructor(public dialog: SystelabOverlayRef, @Inject(SYS_DIALOG_DATA) public parameters: SecondComponentParameters) {
-    console.log(this.parameters);
+  constructor(public dialog: DialogRef<SecondComponentParameters>) {
+    this.parameters = dialog.context;
   }
 
   public static getParameters(): SecondComponentParameters {

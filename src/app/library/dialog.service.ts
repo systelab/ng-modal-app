@@ -1,11 +1,9 @@
-import { Injectable, InjectionToken, Injector, Type } from '@angular/core';
+import { Injectable, Injector, Type } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
 import { SystelabModalContext } from './modal';
-import { SystelabOverlayRef } from './systelab-overlay-ref';
-
-export const SYS_DIALOG_DATA = new InjectionToken<{}>('SYS_DIALOG_DATA');
+import { DialogRef } from './dialog-ref';
 
 @Injectable({
   providedIn: 'root'
@@ -26,17 +24,15 @@ export class DialogService {
                           .centerVertically(),
       scrollStrategy:   this.overlay.scrollStrategies.block()
     });
-    const dialogRef = new SystelabOverlayRef(overlayRef);
-    const userProfilePortal = new ComponentPortal(component, null, this.createInjector(dialogRef, dialogParameters));
+    const dialogRef = new DialogRef(overlayRef, dialogParameters);
+    const userProfilePortal = new ComponentPortal(component, null, this.createInjector(dialogRef));
     overlayRef.attach(userProfilePortal);
     return dialogRef.getResult();
   }
 
-  private createInjector(overlayRef: SystelabOverlayRef, dataToPass: SystelabModalContext): PortalInjector {
+  private createInjector(overlayRef: DialogRef<SystelabModalContext>): PortalInjector {
     const injectorTokens = new WeakMap();
-    injectorTokens.set(SYS_DIALOG_DATA, dataToPass);
-    injectorTokens.set(SystelabOverlayRef, overlayRef);
+    injectorTokens.set(DialogRef, overlayRef);
     return new PortalInjector(this.injector, injectorTokens);
   }
-
 }
