@@ -1,3 +1,4 @@
+
 export interface ModalComponent<T> {
 }
 
