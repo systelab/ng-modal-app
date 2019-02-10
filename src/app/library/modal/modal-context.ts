@@ -3,50 +3,29 @@ export interface ModalComponent<T> {
 }
 
 export class SystelabModalContext {
-  /**
-   * A Class for the modal dialog container.
-   * Default: modal-dialog
-   */
+
   public dialogClass: string;
 
-  /**
-   * Forced width
-   */
   public width: number = null;
-
-  /**
-   * Forced height
-   */
   public height: number = null;
 
-  /**
-   * Forced minWidth
-   */
   public minWidth: number = null;
-
-  /**
-   * Forced minHeight
-   */
   public minHeight: number = null;
 
-  /**
-   * Forced maxWidth
-   */
   public maxWidth: number = null;
-
-  /**
-   * Forced maxHeight
-   */
   public maxHeight: number = null;
 
-  /**
-   * Forced fullscreen
-   */
+  public widthRelative: string = null;
+  public heightRelative: string = null;
+
+  public minWidthRelative: string = null;
+  public minHeightRelative: string = null;
+
+  public maxWidthRelative: string = null;
+  public maxHeightRelative: string = null;
+
   public fullScreen: boolean = false;
 
-  /**
-   * When true, show a close button on the top right corner.
-   */
   public showClose: boolean;
 
   public setDefaultSize( w: number, h: number ) {

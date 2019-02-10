@@ -1,6 +1,6 @@
 import { Injectable, Injector, Type } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Overlay } from '@angular/cdk/overlay';
+import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
 import { SystelabModalContext } from './modal-context';
 import { DialogRef } from './dialog-ref';
@@ -13,21 +13,37 @@ export class DialogService {
   constructor(public overlay: Overlay, public injector: Injector) {
   }
 
-  public showDialog(component: Type<any>, dialogParameters?: SystelabModalContext): Observable<any> {
-    const overlayRef = this.overlay.create({
-      height:           dialogParameters.height + 'px',
-      width:            dialogParameters.width + 'px',
-      hasBackdrop:      true,
-      positionStrategy: this.overlay.position()
-                          .global()
-                          .centerHorizontally()
-                          .centerVertically(),
-      scrollStrategy:   this.overlay.scrollStrategies.block()
-    });
-    const dialogRef = new DialogRef(overlayRef, dialogParameters);
+  public showDialog(component: Type<any>, parameters?: SystelabModalContext): Observable<any> {
+
+    const overlayRef = this.overlay.create(this.getConfig(parameters));
+    const dialogRef = new DialogRef(overlayRef, parameters);
     const userProfilePortal = new ComponentPortal(component, null, this.createInjector(dialogRef));
     overlayRef.attach(userProfilePortal);
     return dialogRef.getResult();
+  }
+
+  private getConfig(parameters: SystelabModalContext): OverlayConfig {
+    const config = new OverlayConfig();
+    config.panelClass = parameters.dialogClass;
+    if (parameters.fullScreen) {
+      config.width = '100%';
+      config.height = '100%';
+      config.panelClass = 'fullscreen';
+    } else {
+      config.width = parameters.width ? parameters.width : parameters.widthRelative;
+      config.height = parameters.height ? parameters.height : parameters.heightRelative;
+
+      config.minWidth = parameters.minWidth ? parameters.minWidth : parameters.minWidthRelative;
+      config.minHeight = parameters.minHeight ? parameters.minHeight : parameters.minHeightRelative;
+
+      config.maxWidth = parameters.maxWidth ? parameters.maxWidth : parameters.maxWidthRelative;
+      config.maxHeight = parameters.maxHeight ? parameters.maxHeight : parameters.maxHeightRelative;
+    }
+    config.hasBackdrop = true;
+    config.positionStrategy = this.overlay.position().global().centerHorizontally().centerVertically();
+    config.scrollStrategy = this.overlay.scrollStrategies.block();
+
+    return config;
   }
 
   private createInjector(overlayRef: DialogRef<SystelabModalContext>): PortalInjector {

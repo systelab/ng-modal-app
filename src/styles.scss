@@ -1,7 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/cdk/overlay-prebuilt.css';
 
-.cdk-overlay-pane {
+div [class="cdk-overlay-pane"] {
   border: 5px solid lightgray;
   border-radius: 5px;
+}
+
+div [class="cdk-overlay-pane fullscreen"] {
+  border: 0px solid lightgray;
+  border-radius: 0px;
 }
