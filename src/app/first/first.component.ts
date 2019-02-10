@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { ModalComponent, SystelabModalContext } from '../library/modal';
-import { DialogService } from '../library/dialog.service';
+import { DialogRef, DialogService, ModalComponent, SystelabModalContext } from '../library/modal';
 import { SecondComponent, SecondComponentParameters } from '../second/second.component';
-import { DialogRef } from '../library/dialog-ref';
 
 export class FirstComponentParameters extends SystelabModalContext {
   public parameterOne: string;

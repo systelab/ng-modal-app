@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DialogService } from './library/dialog.service';
+import { DialogService } from './library/modal';
 import { FirstComponent, FirstComponentParameters } from './first/first.component';
 
 @Component({
