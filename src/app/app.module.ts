@@ -19,11 +19,7 @@ import { SecondComponent } from './second/second.component';
     OverlayModule,
   ],
   providers:       [],
-  bootstrap:       [AppComponent],
-  entryComponents: [
-    FirstComponent,
-    SecondComponent
-  ]
+  bootstrap:       [AppComponent]
 })
 export class AppModule {
 }
